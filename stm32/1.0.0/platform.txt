@@ -4,8 +4,9 @@
 # For more info:
 # https://arduino.github.io/arduino-cli/latest/platform-specification/
 
-name=STM32 boards groups (Board to be selected from Tools submenu 'Board part number')
-version=2.9.0
+#name=STM32 boards groups (Board to be selected from Tools submenu 'Board part number')
+name=KISPE STM32
+version=0.0.1
 
 
 # Define variables used multiple times in platform file
@@ -17,7 +18,7 @@ busybox=
 busybox.windows={runtime.tools.STM32Tools.path}/win/busybox.exe
 
 toolchain_dir={runtime.tools.xpack-arm-none-eabi-gcc-13.2.1-1.1.path}
-openocd_dir={runtime.tools.xpack-openocd-0.12.0-4.path}
+openocd_dir={runtime.tools.xpack-openocd-0.12.0-3.path}
 
 tools_bin_path.windows={runtime.tools.STM32Tools.path}/win
 tools_bin_path.macosx={runtime.tools.STM32Tools.path}/macosx
@@ -28,10 +29,9 @@ hal_dir={build.system.path}/Drivers/{build.series}_HAL_Driver
 cmsis_dir={runtime.tools.CMSIS-5.9.0.path}/CMSIS
 cmsis_dev_dir={build.system.path}/Drivers/CMSIS/Device/ST/{build.series}
 usbd_core_dir={build.system.path}/Middlewares/ST/STM32_USB_Device_Library/Core
-builtin_library_dir={build.core.path}/../../libraries
-SrcWrapper_include_dir={builtin_library_dir}/SrcWrapper/inc
-VirtIO_include_dir={builtin_library_dir}/VirtIO/inc
-USBDevice_include_dir={builtin_library_dir}/USBDevice/inc
+SrcWrapper_include_dir={runtime.platform.path}/libraries/SrcWrapper/inc
+VirtIO_include_dir={runtime.platform.path}/libraries/VirtIO/inc
+USBDevice_include_dir={runtime.platform.path}/libraries/USBDevice/inc
 
 
 # STM compile variables
@@ -109,14 +109,10 @@ build.usb_flags=-DUSBCON {build.usb_speed} -DUSBD_VID={build.vid} -DUSBD_PID={bu
 
 # Specify defaults for vid/pid
 # Boards should specify either both, or neither of these.
-vid.0=0x0483
-pid.0=0x5740
 build.vid={vid.0}
 build.pid={pid.0}
-upload.vid.0=0x0483
-upload.pid.0=0xdf11
-upload.vid={upload.vid.0}
-upload.pid={upload.pid.0}
+upload.vid=0x0483
+upload.pid=0xdf11
 
 # To customize the USB manufacturer or product string, must add defines
 # for them, e.g.:
@@ -153,6 +149,7 @@ extras.path={build.system.path}/extras
 
 # Create {build.opt} if not exists in the output sketch dir and force include of SrcWrapper library
 recipe.hooks.prebuild.1.pattern="{busybox}" sh "{extras.path}/prebuild.sh" "{build.path}" "{build.source.path}" "{runtime.platform.path}" "usb={build.enable_usb}" "virtio={build.enable_virtio}"
+recipe.hooks.postbuild.1.pattern="{busybox}" sh "{extras.path}/postbuild.sh" "{build.path}" "{build.series}" "{runtime.platform.path}"
 
 # compile patterns
 # ---------------------
@@ -238,47 +235,6 @@ tools.remoteproc_gen.upload.params.verbose=
 tools.remoteproc_gen.upload.params.quiet=
 tools.remoteproc_gen.upload.pattern="{busybox}" sh "{path}/{script}" generate "{build.path}/{build.project_name}.elf" "{build.path}/run_arduino_{build.project_name}.sh"
 
-# OpenOCD sketch upload
-tools.openocd_upload.path={openocd_dir}
-tools.openocd_upload.cmd=bin/openocd
-tools.openocd_upload.cmd.windows=bin/openocd.exe
-tools.openocd_upload.upload.params.verbose=-d2
-tools.openocd_upload.upload.params.quiet=-d0
-tools.openocd_upload.upload.pattern="{path}/{cmd}" {upload.verbose} -f interface/{upload.protocol}.cfg -f target/{openocd.target}.cfg -c "program {build.path}/{build.project_name}.elf verify reset exit"
-
-###############################################################################################################
-
-## SATLL
-SATLL.name=SATLL OBC
-SATLL.build.core=arduino
-SATLL.build.board=GENERIC_H753VITX
-SATLL.build.st_extra_flags=-D{build.product_line} {build.enable_usb} {build.xSerial}
-SATLL.build.fpu=-mfpu=fpv4-sp-d16
-SATLL.build.float-abi=-mfloat-abi=hard
-SATLL.build.series=STM32H7xx
-SATLL.build.mcu=cortex-m7
-SATLL.build.flash_offset=0x0
-SATLL.upload.maximum_size=0
-SATLL.upload.maximum_data_size=0
-SATLL.programmer.default=stlink
-SATLL.debug.server.openocd.scripts.2=target/stm32h7x.cfg
-SATLL.vid.0=0x0483
-SATLL.pid.0=0x5740
-
-# STlink V1/V2.1/V3
-SATLL.pid.1=0x3744
-SATLL.vid.2=0x0483
-SATLL.pid.2=0x3748
-SATLL.vid.3=0x0483
-SATLL.pid.3=0x374b
-SATLL.vid.4=0x0483
-SATLL.pid.4=0x374e
-SATLL.vid.5=0x0483
-SATLL.pid.5=0x374f
-SATLL.vid.6=0x0483
-SATLL.pid.6=0x3752
-SATLL.vid.7=0x0483
-SATLL.pid.7=0x3753
 #
 # Debugger
 #
@@ -290,6 +246,5 @@ debug.server=openocd
 debug.server.openocd.path={openocd_dir}/bin/openocd
 debug.server.openocd.scripts_dir={openocd_dir}/openocd/scripts
 # Common config
-debug.server.openocd.scripts.0=interface/stlink.cfg
-debug.server.openocd.scripts.1={runtime.platform.path}/debugger/select_hla.cfg
-debug.server.openocd.scripts.2=target/{openocd.target}.cfg
+debug.server.openocd.scripts.0=interface/{programmer.protocol}.cfg
+debug.server.openocd.scripts.1={programmer.transport_script}

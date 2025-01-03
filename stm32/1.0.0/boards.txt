@@ -28,6 +28,7 @@ SATLL.upload.maximum_size=0
 SATLL.upload.maximum_data_size=0
 SATLL.programmer.default=stlink
 SATLL.debug.server.openocd.scripts.2=target/stm32h7x.cfg
+SATLL.openocd.target=stm32h7x
 SATLL.vid.0=0x0483
 SATLL.pid.0=0x5740
 

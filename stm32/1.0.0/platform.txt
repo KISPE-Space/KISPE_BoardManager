@@ -6,7 +6,7 @@
 
 #name=STM32 boards groups (Board to be selected from Tools submenu 'Board part number')
 name=KISPE STM32
-version=0.0.1
+version=1.0.0
 
 
 # Define variables used multiple times in platform file

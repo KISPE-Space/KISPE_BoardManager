@@ -1,13 +1,13 @@
 {
   "packages": [
-      {
-          "name": "KISPE",
-          "maintainer": "KISPE Space",
-          "websiteURL": "https://www.kispe.co.uk/"
+    {
+      "name": "KISPE",
+      "maintainer": "KISPE Space",
+      "websiteURL": "https://www.kispe.co.uk/"
       "platforms": [
         {
-        "name": "KISPE STM32",
-         "architecture": "stm32",
+          "name": "KISPE STM32",
+          "architecture": "stm32",
           "version": "1.0.1",
           "category": "Contributed",
           "url": "https://github.com/KISPE-Space/KISPE_BoardManager/blob/main/stm32/KISPE-STM-1.0.1.zip?raw=true",
@@ -15,38 +15,37 @@
           "checksum": "SHA-256:506d5cf4f9adc8c7c5bdb876247553e3338ec536d824a795da6a0f7c94c54ac5",
           "size": "69653922",
           "boards": [
-            {"name": "SATLL_OBC"}
+            { "name": "SATLL_OBC" }
           ],
           "toolsDependencies": [
-                      {
-                        "packager": "KISPE",
-                        "name": "xpack-arm-none-eabi-gcc",
-                        "version": "13.2.1-1.1"
-                      },
-                      {
-                        "packager": "KISPE",
-                        "name": "xpack-openocd",
-                        "version": "0.12.0-4"
-                      },
-                      {
-                        "packager": "KISPE",
-                        "name": "STM32Tools",
-                        "version": "2.2.4"
-                      },
-                      {
-                        "packager": "KISPE",
-                        "name": "CMSIS",
-                        "version": "5.9.0"
-                      },
-                      {
-                        "packager": "KISPE",
-                        "name": "STM32_SVD",
-                        "version": "1.16.0"
-                      }
-                    ]
-                  }
-      },
-                ],
+            {
+              "packager": "KISPE",
+              "name": "xpack-arm-none-eabi-gcc",
+              "version": "13.2.1-1.1"
+            },
+            {
+              "packager": "KISPE",
+              "name": "xpack-openocd",
+              "version": "0.12.0-4"
+            },
+            {
+              "packager": "KISPE",
+              "name": "STM32Tools",
+              "version": "2.2.4"
+            },
+            {
+              "packager": "KISPE",
+              "name": "CMSIS",
+              "version": "5.9.0"
+            },
+            {
+              "packager": "KISPE",
+              "name": "STM32_SVD",
+              "version": "1.16.0"
+            }
+          ]
+        }
+      ],
       "tools": [
         {
           "name": "xpack-arm-none-eabi-gcc",

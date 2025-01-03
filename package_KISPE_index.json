@@ -3,7 +3,7 @@
     {
       "name": "KISPE",
       "maintainer": "KISPE Space",
-      "websiteURL": "https://www.kispe.co.uk/"
+      "websiteURL": "https://www.kispe.co.uk/",
       "platforms": [
         {
           "name": "KISPE STM32",

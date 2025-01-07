@@ -10,12 +10,7 @@
  *
  *******************************************************************************
  */
-#if defined(ARDUINO_GENERIC_H742VGHX) || defined(ARDUINO_GENERIC_H742VGTX) ||\
-    defined(ARDUINO_GENERIC_H742VIHX) || defined(ARDUINO_GENERIC_H742VITX) ||\
-    defined(ARDUINO_GENERIC_H743VGHX) || defined(ARDUINO_GENERIC_H743VGTX) ||\
-    defined(ARDUINO_GENERIC_H743VIHX) || defined(ARDUINO_GENERIC_H743VITX) ||\
-    defined(ARDUINO_GENERIC_H750VBTX) || defined(ARDUINO_GENERIC_H753VIHX) ||\
-    defined(ARDUINO_GENERIC_H753VITX)
+#if defined(ARDUINO_SATLL_OBC_STM32H735VIT6)
 #include "pins_arduino.h"
 
 /**

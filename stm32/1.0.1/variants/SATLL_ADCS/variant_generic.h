@@ -190,15 +190,15 @@
 // Default pin used for generic 'Serial' instance - Debugger serial
 // Mandatory for Firmata
 #ifndef PIN_SERIAL_RX
-  #define PIN_SERIAL_RX         PB10
+  #define PIN_SERIAL_RX         PB11
 #endif
 #ifndef PIN_SERIAL_TX
-  #define PIN_SERIAL_TX         PB11
+  #define PIN_SERIAL_TX         PB10
 #endif
 
 //UART for communication with OBC board - maybe redundant
 #define PIN_SERIAL1_RX PE8
-#define PIN_SERIAL2_TX PE9
+#define PIN_SERIAL1_TX PE7
 
 
 // Extra HAL modules

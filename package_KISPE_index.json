@@ -12,7 +12,7 @@
           "category": "Contributed",
           "url": "https://github.com/KISPE-Space/KISPE_BoardManager/blob/main/stm32/KISPE-STM-1.0.1.zip?raw=true",
           "archiveFileName": "KISPE-STM-1.0.1.zip",
-          "checksum": "SHA-256:71607cc6480147655f47241db1bceb4ecc20ee7a705677604a725d32087e0543",
+          "checksum": "SHA-256:8c7e31922093a0d938db0b52fe4d1cba244e0fc9464778a01edbadd2a948381f",
           "size": "44794404",
           "boards": [
             { "name": "SATLL_OBC", "name":"SATLL_ADCS"}
